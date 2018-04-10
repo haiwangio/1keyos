@@ -14,13 +14,12 @@ RUN mkdir -p /home/root/
 RUN mkdir coreos-sdk
 RUN apt-get install -y vim 
 RUN apt-get update && apt-get install --no-install-recommends -y git-core gitk git-gui subversion curl ca-certificates python xz-utils sudo
-RUN groupadd -g 500 core; useradd -u 500 -g 500   core; chown -R core:core /home 
+RUN groupadd -g 500 core; useradd -u 500 -g 500   core; chown -R core:core /home
 RUN echo "%core ALL=(ALL)  NOPASSWD: ALL" >> /etc/sudoers
+RUN mkdir -p  /mnt/host/source
+RUN chown -R core:core /mnt/host/source
 RUN chmod +x cork && mkdir -p /home/core/.local/bin && mv cork /home/core/.local/bin
 USER core
 ENV PATH ${PATH}:/home/core/.local/bin
-#COPY ./asset/ /mnt/host/source/
-RUN mkdir -p  /mnt/host/source/
 RUN git clone https://github.com/1keyos/scripts /mnt/host/source/src/
-RUN chown -R core:core /mnt/host/source
 RUN  cork create
