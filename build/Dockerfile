@@ -20,6 +20,7 @@ RUN chmod +x cork && mkdir -p /home/core/.local/bin && mv cork /home/core/.local
 USER core
 ENV PATH ${PATH}:/home/core/.local/bin
 #COPY ./asset/ /mnt/host/source/
+RUM mkdir -p  /mnt/host/source/
 RUN git clone https://github.com/1keyos/scripts /mnt/host/source/src/
 RUN chown -R core:core /mnt/host/source
 RUN  cork create
